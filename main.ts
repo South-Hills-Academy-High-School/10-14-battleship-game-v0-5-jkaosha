@@ -7,15 +7,19 @@ function makeBoatVisible (boatArray: Sprite[]) {
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    cursor.setFlag(SpriteFlag.Invisible, false)
-    moveBoatFlag = 0
+    if (currentBoat == 2) {
+        cursor.setFlag(SpriteFlag.Invisible, false)
+        moveBoatFlag = 0
+    } else {
+        currentBoat += 1
+    }
 })
 function moveBoat (boatArray: any[]) {
     makeBoatVisible(boatArray)
-    if (grid.spriteRow(cursor) == 6 && boatRotateArray[currentBoat] == "up") {
+    if (grid.spriteRow(cursor) == 8 - boatArray.length && boatRotateArray[currentBoat] == "up") {
         grid.move(cursor, 0, -1)
     }
-    if (grid.spriteCol(cursor) == 9 && boatRotateArray[currentBoat] == "sideways") {
+    if (grid.spriteCol(cursor) == 11 - boatArray.length && boatRotateArray[currentBoat] == "sideways") {
         grid.move(cursor, -1, 0)
     }
     cursor.setFlag(SpriteFlag.Invisible, true)
